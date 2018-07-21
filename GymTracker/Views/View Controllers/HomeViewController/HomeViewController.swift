@@ -17,8 +17,12 @@ class HomeViewController: UIViewController {
         return tableView
     }()
     
+    let menuItems = MenuItems().getMenuItems()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Gym Tracker"
         
         setupTableView()
     }
@@ -28,7 +32,7 @@ extension HomeViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -45,11 +49,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return menuItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else { return UITableViewCell() }
+        
+        let data = menuItems[indexPath.row]
+        
+        cell.textLabel?.text = data.name
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -58,6 +68,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (tableView.frame.size.height - 64.0) / 3 // 64.0 accounts for navigation bar
+        return (tableView.frame.size.height - 64.0) / CGFloat(menuItems.count) // 64.0 accounts for navigation bar
     }
 }

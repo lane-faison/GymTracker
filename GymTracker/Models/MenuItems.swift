@@ -18,10 +18,10 @@ public struct MenuItems {
     func getMenuItems() -> [MenuItem] {
         var itemsArray: [MenuItem] = []
         
-        itemsArray.append(MenuItem(name: "Lifting", image: nil))
-        itemsArray.append(MenuItem(name: "Running", image: nil))
-        itemsArray.append(MenuItem(name: "Nutrition", image: nil))
-        itemsArray.append(MenuItem(name: "Gym check-in", image: nil))
+        itemsArray.append(MenuItem(name: "Lifting", image: UIImage(named: "weight")))
+        itemsArray.append(MenuItem(name: "Running", image: UIImage(named: "star")))
+        itemsArray.append(MenuItem(name: "Nutrition", image: UIImage(named: "settings")))
+        itemsArray.append(MenuItem(name: "Gym check-in", image: UIImage(named: "location")))
         
         return itemsArray
     }
